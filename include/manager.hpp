@@ -13,8 +13,11 @@ class manager {
 public : 
 
     manager(std::shared_ptr<sf::RectangleShape> rect_ptr , click_box* click_box_ptr , sf::VideoMode* screen_ptr , sf::RenderWindow& win);
+    
     void remove_rect();
+
     void update(const sf::Event& event);
+
 
 
 private : 
@@ -28,6 +31,7 @@ private :
     sf::RenderWindow& m_win;
 
     std::mt19937 m_engine;
+
 
 };
 
