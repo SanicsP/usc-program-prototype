@@ -1,0 +1,13 @@
+#Dossiers
+SFML/
+build/
+.vscode/
+
+#extensions
+*.o
+*.exe 
+*.app 
+*.asm
+*.dll
+*.lib
+*.bin

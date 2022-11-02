@@ -1,0 +1,66 @@
+cmake_minimum_required(VERSION 3.24.2)
+#standar c++
+
+
+
+set(CXX_STANDARD 17)
+set(CXX_STANDARD_REQUIRED true)
+
+set(project_name_t ust)
+
+project(${project_name_t})
+
+
+
+
+#construction
+set(sources_dir ${PROJECT_SOURCE_DIR}/src)
+
+
+set(include_dir ${PROJECT_SOURCE_DIR}/include)
+
+#Pour la bibliothèque SFML 
+set(SFML_include_dir ${PROJECT_SOURCE_DIR}/SFML/include)
+
+set(SFML_lib_dir ${PROJECT_SOURCE_DIR}/SFML/lib)
+
+
+set(sources 
+    
+    ${sources_dir}/main.cpp
+    ${sources_dir}/click_box.cpp
+    ${sources_dir}/manager.cpp
+    ${sources_dir}/recorder.cpp
+    ${sources_dir}/session.cpp
+
+)
+
+#bibliothèques sfml à lier à l'executable 
+
+set(SFML_libs 
+    
+    sfml-graphics-s-d
+    sfml-window-s-d
+    sfml-system-s-d
+    opengl32
+    freetype
+    winmm
+    gdi32
+
+)
+
+
+
+add_executable(${project_name_t} ${sources})
+target_compile_options(${project_name_t} PUBLIC -DSFML_STATIC PUBLIC -std=c++17) 
+target_include_directories(${project_name_t} PUBLIC ${include_dir} PUBLIC ${SFML_include_dir})
+target_link_directories(${project_name_t} PUBLIC ${SFML_lib_dir})
+target_link_libraries(${project_name_t} PUBLIC ${SFML_libs})
+
+
+
+
+
+
+
+
