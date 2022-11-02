@@ -7,6 +7,7 @@
 #include <cmath>
 #include <algorithm>
 #include <numeric>
+#include <unordered_map>
 
 #define PIXEL_SIZE 0.264583
 
@@ -82,16 +83,14 @@ public:
 
         virtual void draw(sf::RenderTarget& target , sf::RenderStates states) const;
         
-        sf::Text m_counter_text;
         
-        sf::Text m_current_speed_text;
         
-        sf::Text m_speed_mean_text; 
         
         void replace(const sf::Vector2f& new_pos);
         
         void set_font(const sf::Font& font);
 
+        std::array<sf::Text , 5> m_text_array;
         private : 
 
         uint16_t m_text_size;

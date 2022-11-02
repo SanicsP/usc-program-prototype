@@ -75,9 +75,7 @@ void recorder::update()
         record_speed();
         store_speed();
 
-        m_stat_box->m_counter_text.setString(std::to_string(m_counter));
-        m_stat_box->m_current_speed_text.setString(std::to_string(get_curret_speed()));
-        m_stat_box->m_speed_mean_text.setString(std::to_string(get_speed_mean()));
+       
 
 
 
@@ -106,37 +104,30 @@ recorder::text_box::text_box(const sf::Vector2f& pos , uint16_t text_size , uint
 m_text_size(text_size) ,
 m_text_dist(text_dist) 
 {
-    m_counter_text.setCharacterSize(m_text_size);
-    m_current_speed_text.setCharacterSize(m_text_size);
-    m_speed_mean_text.setCharacterSize(m_text_size);
+
 
     this->replace(pos);
 }
 
 void recorder::text_box::replace(const sf::Vector2f& new_pos)
 {
-    m_counter_text.setPosition(new_pos);
+    /* m_counter_text.setPosition(new_pos);
     
     m_current_speed_text.setPosition(sf::Vector2f{m_counter_text.getPosition().x , 
                                     m_counter_text.getPosition().y + m_text_dist});
     
     m_speed_mean_text.setPosition(sf::Vector2f{m_current_speed_text.getPosition().x 
-                                  , m_current_speed_text.getPosition().y + m_text_dist});
+                                  , m_current_speed_text.getPosition().y + m_text_dist}); */
      
 }
 
 void recorder::text_box::set_font(const sf::Font& font)
 {
-    m_counter_text.setFont(font);
-    m_current_speed_text.setFont(font);
-    m_speed_mean_text.setFont(font);
-
+   
 }
 
 void recorder::text_box::draw(sf::RenderTarget& target , sf::RenderStates states) const
 {
-    target.draw(m_counter_text);
-    target.draw(m_current_speed_text);
-    target.draw(m_speed_mean_text);
+   
 
 }

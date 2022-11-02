@@ -11,7 +11,7 @@ int main()
 {
 
     sf::RectangleShape rect_test{sf::Vector2f(70 , 40)};
-    rect_test.setFillColor(sf::Color::Red);
+    rect_test.setFillColor({255 , 127 , 0});
     sf::VideoMode win_size{500 , 500};
 
     sf::RenderWindow win{win_size , "DEFAULT"};
