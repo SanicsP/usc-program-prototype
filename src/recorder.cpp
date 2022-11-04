@@ -7,15 +7,7 @@ m_rect_ptr(rect_ptr) , m_win_ref(win_ref) , m_counter(0)
     m_record_rect_pos =  m_rect_ptr->getPosition() ;
     m_start_moment = std::chrono::steady_clock::now() ; 
     
-    sf::Vector2f dist_vector = sf::Vector2f ( 
-        
-          sf::Mouse::getPosition(m_win_ref).x - m_record_rect_pos.x , 
-          sf::Mouse::getPosition(m_win_ref).y - m_record_rect_pos.y
-
-    );
-
-    m_record_distbtw_mouse_rect = sqrt(pow(dist_vector.x , 2) + pow(dist_vector.y , 2));
-
+    record_dist_btwnMR(m_win_ref);
 
 
 }
@@ -101,6 +93,26 @@ void recorder::update()
     }
 
 }
+
+void recorder::restart()
+{
+    m_counter = 0;
+    m_recorder_speed_array.clear();
+    m_record_old_rect_pos.x = 0;
+    m_record_old_rect_pos.y = 0;
+    m_record_distbtw_mouse_rect = 0;
+    m_click_duration = std::chrono::seconds(0);
+
+    m_record_rect_pos =  m_rect_ptr->getPosition();
+    m_start_moment = std::chrono::steady_clock::now();
+    
+    for(int i = 0 ; i < TXTBSIZE ; i++)
+    {
+        m_stat_box->m_text_array[i].setString("RESTARTED");
+    }
+
+}
+
 ///////////////////////////////////////////////////////////////////////////////////
 
 recorder::text_box::text_box(const sf::Vector2f& pos , uint16_t text_size , uint16_t text_dist) : 

@@ -36,7 +36,7 @@ public:
 
     void set_txt_box(text_box* box_ptr);
 
-
+    void restart();
 
 private:
 
@@ -45,6 +45,7 @@ private:
     std::shared_ptr<sf::RectangleShape> m_rect_ptr;
 
     sf::Vector2f m_record_rect_pos;
+    
     sf::Vector2f m_record_old_rect_pos; 
 
 
@@ -59,7 +60,7 @@ private:
     sf::RenderWindow& m_win_ref;
     
     std::vector<double> m_recorder_speed_array;
-    
+
 
     text_box* m_stat_box;
 
@@ -93,6 +94,7 @@ public:
         void set_size(const uint16_t& new_size);
 
         sf::Text m_text_array[TXTBSIZE];
+
 
         private : 
 
