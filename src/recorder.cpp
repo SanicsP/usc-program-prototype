@@ -65,23 +65,6 @@ void recorder::record_duration()
     m_start_moment = std::chrono::steady_clock::now();
 }
 
-void recorder::update()
-{
-    if(rect_moved())
-    {
-        m_counter++;
-        record_duration();
-        record_dist_btwnMR(m_win_ref);
-        record_speed();
-        store_speed();
-
-       
-
-
-
-    }
-
-}
 
 double recorder::get_speed_mean() const 
 {
@@ -98,36 +81,69 @@ void recorder::set_txt_box(text_box* box_ptr)
     m_stat_box = box_ptr;
 }
 
+void recorder::update()
+{
+    if(rect_moved())
+    {
+        m_counter++;
+        record_duration();
+        record_dist_btwnMR(m_win_ref);
+        record_speed();
+        store_speed();
+
+        m_stat_box->m_text_array[0].setString("counter : " + std::to_string(m_counter));
+        m_stat_box->m_text_array[1].setString("current speed(mm/s) : " + std::to_string(record_speed()));
+        m_stat_box->m_text_array[2].setString("speed mean(mm/s) : " + std::to_string(get_speed_mean()));
+
+
+    
+
+    }
+
+}
 ///////////////////////////////////////////////////////////////////////////////////
 
 recorder::text_box::text_box(const sf::Vector2f& pos , uint16_t text_size , uint16_t text_dist) : 
 m_text_size(text_size) ,
 m_text_dist(text_dist) 
 {
-
-
     this->replace(pos);
+    this->set_size(m_text_size);
 }
 
 void recorder::text_box::replace(const sf::Vector2f& new_pos)
 {
-    /* m_counter_text.setPosition(new_pos);
-    
-    m_current_speed_text.setPosition(sf::Vector2f{m_counter_text.getPosition().x , 
-                                    m_counter_text.getPosition().y + m_text_dist});
-    
-    m_speed_mean_text.setPosition(sf::Vector2f{m_current_speed_text.getPosition().x 
-                                  , m_current_speed_text.getPosition().y + m_text_dist}); */
-     
+    m_text_array[0].setPosition(new_pos);
+
+    for(int i = 1 ; i < TXTBSIZE ; i++)
+    {
+        m_text_array[i].setPosition(sf::Vector2f(m_text_array[i-1].getPosition().x , m_text_array[i-1].getPosition().y + m_text_size));
+    }
 }
 
 void recorder::text_box::set_font(const sf::Font& font)
 {
+     for(int i = 0 ; i < TXTBSIZE ; i++)
+     {
+        m_text_array[i].setFont(font);
+     }
    
 }
 
 void recorder::text_box::draw(sf::RenderTarget& target , sf::RenderStates states) const
 {
-   
+    for(int i = 0 ; i < TXTBSIZE ; i++)
+    {
+        target.draw(m_text_array[i]);
+    }
+
+}
+
+void recorder::text_box::set_size(const uint16_t& new_size)
+{
+    for(int i = 0 ; i < TXTBSIZE ; i++)
+    {
+        m_text_array[i].setCharacterSize(new_size);
+    }
 
 }

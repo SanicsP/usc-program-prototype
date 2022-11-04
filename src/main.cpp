@@ -21,8 +21,14 @@ int main()
     manager manage_test{std::shared_ptr<sf::RectangleShape>(&rect_test) , &rect_boutton , &win_size , win};
 
     recorder stats{std::shared_ptr<sf::RectangleShape>(&rect_test) , win};
+    
+    
+   
 
-    recorder::text_box stats_text {sf::Vector2f(400 , 0) , 10 , 20};
+  
+    
+
+    recorder::text_box stats_text {sf::Vector2f(300 , 0) , 10 , 20};
 
 
     sf::Font font;
@@ -33,6 +39,7 @@ int main()
         std::cout<<"aucune police trouvee\n";
         exit(1);
     }
+
     stats_text.set_font(font);
     stats.set_txt_box(&stats_text);
 

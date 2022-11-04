@@ -10,7 +10,7 @@
 #include <unordered_map>
 
 #define PIXEL_SIZE 0.264583
-
+#define TXTBSIZE 3
 
 
 
@@ -60,7 +60,6 @@ private:
     
     std::vector<double> m_recorder_speed_array;
     
-    std::shared_ptr<sf::Text>* m_text_ptr;
 
     text_box* m_stat_box;
 
@@ -79,6 +78,7 @@ public:
     struct text_box : sf::Drawable
     {   
         
+        
         text_box(const sf::Vector2f& pos , uint16_t text_size , uint16_t text_dist);
 
         virtual void draw(sf::RenderTarget& target , sf::RenderStates states) const;
@@ -90,7 +90,10 @@ public:
         
         void set_font(const sf::Font& font);
 
-        std::array<sf::Text , 5> m_text_array;
+        void set_size(const uint16_t& new_size);
+
+        sf::Text m_text_array[TXTBSIZE];
+
         private : 
 
         uint16_t m_text_size;
