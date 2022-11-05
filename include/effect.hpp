@@ -1,21 +1,22 @@
 #ifndef EFFECT_HPP
 #define EFFECT_HPP
 
-#include "manager.hpp"
+#include <memory>
+#include <SFML/Graphics.hpp>
 
 class basic_effect 
 {
 
 public : 
-    basic_effect(const std::shared_ptr<sf::RectangleShape>& rect_ptr , const std::shared_ptr<sf::Sprite>& sprite_ptr);
+    basic_effect(const std::shared_ptr<sf::RectangleShape>& rect_ptr , const std::shared_ptr<sf::Sprite>& sprite_ptr , sf::Time duration);
     
     void effect_on(bool b); 
     
     bool is_activated();
+    bool is_finished();
 
     virtual void update() = 0;
 
-    virtual ~basic_effect() = 0;
 
 
 protected : 
@@ -25,8 +26,11 @@ protected :
     std::shared_ptr<sf::Sprite> m_sprite_ptr;
 
     bool m_activated; 
+    bool m_finished;
 
     sf::Clock m_clock;
+
+    sf::Time m_effect_duration;
 
 };
 

@@ -4,7 +4,11 @@
 #include <random>
 #include <chrono>
 
+
 #include "click_box.hpp"
+#include "specialized_effects.hpp"
+
+
 
 
 /**
@@ -44,7 +48,9 @@ private :
 
     sf::Sprite m_target_sprite;
 
+    std::unique_ptr<basic_effect> m_sfx_ptr;
 
+    bool m_effect_working;
 
 
 

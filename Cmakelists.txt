@@ -33,6 +33,7 @@ set(sources
     ${sources_dir}/recorder.cpp
     ${sources_dir}/session.cpp
     ${sources_dir}/effect.cpp
+    ${sources_dir}/specialized_effects.cpp
 
 )
 
