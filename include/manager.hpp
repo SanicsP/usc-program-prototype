@@ -7,7 +7,9 @@
 #include "click_box.hpp"
 
 
-
+/**
+ * @brief effectue les actions du programme , déplacer le rectangle aléatoirement par exemple
+*/
 class manager {
 
 public : 
@@ -17,6 +19,12 @@ public :
     void remove_rect();
 
     void update(const sf::Event& event);
+
+    void set_target_sprite_texture(const sf::Texture& texture);
+
+    const sf::Sprite& get_sprite() const ;
+
+
 
 
 
@@ -31,6 +39,11 @@ private :
     sf::RenderWindow& m_win;
 
     std::mt19937 m_engine;
+
+    sf::Sprite m_target_sprite;
+
+
+
 
 
 };

@@ -28,6 +28,19 @@ void manager::update(const sf::Event& event)
     if(m_click_box_ptr->pressed(m_win , event.mouseButton))
     {
         this->remove_rect();
+        m_target_sprite.setPosition(m_rect_ptr->getPosition());
     }
 
 }
+
+void manager::set_target_sprite_texture(const sf::Texture& texture)
+{
+    m_target_sprite.setTexture(texture);
+
+}
+
+const sf::Sprite& manager::get_sprite() const 
+{
+    return m_target_sprite;
+}
+

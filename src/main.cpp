@@ -15,8 +15,9 @@ int main()
     sf::VideoMode win_size{500 , 500};
     
     sf::Font font;
+    sf::Texture target_texture;
     
-    if(!font.loadFromFile("ressources/lato-bold.ttf"))
+    if(!font.loadFromFile("ressources/lato-bold.ttf") || !(target_texture.loadFromFile("ressources/target_texture.png")))
     {
         std::cout<<"aucune police trouvee\n";
         exit(1);
@@ -29,7 +30,7 @@ int main()
     click_box rect_boutton{std::shared_ptr<sf::RectangleShape>(&rect_test) , sf::Mouse::Button::Left };
 
     manager manage_test{std::shared_ptr<sf::RectangleShape>(&rect_test) , &rect_boutton , &win_size , win};
-
+    manage_test.set_target_sprite_texture(target_texture);
     recorder stats{std::shared_ptr<sf::RectangleShape>(&rect_test) , win};
 
     recorder::text_box stats_text {sf::Vector2f(300 , 0) , 10 , 20};
@@ -112,6 +113,7 @@ int main()
 
         win.draw(rect_test);
         win.draw(stats_text);
+        win.draw(manage_test.get_sprite());
 
         win.display();
 
