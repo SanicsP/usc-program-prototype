@@ -18,6 +18,7 @@ class session {
 public:
 
     session(recorder* rec , manager* man);
+    
 
     void start();
 
@@ -29,9 +30,12 @@ public:
 
     step stat() const;
 
+    step last_stat() const;
+    
 private:
     
     step m_step;
+    step m_last_step;
     recorder* recorder_ptr;
     manager* manager_ptr;
     

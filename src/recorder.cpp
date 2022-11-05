@@ -73,6 +73,13 @@ void recorder::set_txt_box(text_box* box_ptr)
     m_stat_box = box_ptr;
 }
 
+void recorder::reset_time()
+{
+
+    m_click_moment = std::chrono::steady_clock::now();
+
+}
+
 void recorder::update()
 {
     if(rect_moved())

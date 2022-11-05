@@ -41,10 +41,14 @@ int main()
     session PROGRAMM(&stats , &manage_test);
     std::cout<<"start\n P : pause\n R : restart\n Q : quitt\n";
     
+    sf::Event win_event;
+
     while(win.isOpen())
     {
         if(PROGRAMM.stat() == step::START)
         {
+            if(PROGRAMM.last_stat() == step::PAUSE)
+                stats.reset_time();
             stats.update();
 
         }
@@ -59,11 +63,36 @@ int main()
         }
         else // pause 
         {
-            std::cout<<"PAUSE(->)\n";
-            PROGRAMM.start();
+            if(win.waitEvent(win_event))
+            {
+                if(win_event.type == sf::Event::KeyReleased)
+                {
+                  switch(win_event.key.code)
+                  {
+                    case sf::Keyboard::Q :
+                    {
+                        PROGRAMM.end();
+                        std::cout<<"exit after pause\n";
+                        break;
+                    }
+                    case sf::Keyboard::R : 
+                    {
+                        PROGRAMM.restart();
+                        std::cout<<"restart after pause\n";
+                        break;
+                    }
+                    case sf::Keyboard::P :
+                    {
+                        PROGRAMM.start(); 
+                        std::cout<<"start after pause\n";
+                        break;
+                    }
+                  }  
+                }
+            }
+          
         }
 
-        sf::Event win_event;
         
         while (win.pollEvent(win_event))
         {

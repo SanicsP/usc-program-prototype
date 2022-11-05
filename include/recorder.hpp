@@ -38,6 +38,9 @@ public:
 
     void restart();
 
+    void reset_time();
+
+
 private:
 
     uint32_t m_counter;
