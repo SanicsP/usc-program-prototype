@@ -38,63 +38,34 @@ int main()
     stats_text.set_font(font);
     stats.set_txt_box(&stats_text);
 
-    session PROGRAMM(&stats , &manage_test);
     std::cout<<"start\n P : pause\n R : restart\n Q : quitt\n";
     
     sf::Event win_event;
+    session PROGRAMM(&stats , &manage_test , win , win_event);
 
     while(win.isOpen())
     {
+        // execution des différentes phases du programme 
         if(PROGRAMM.stat() == step::START)
         {
-            if(PROGRAMM.last_stat() == step::PAUSE)
-                stats.reset_time();
-            stats.update();
+           PROGRAMM.s_start();
 
         }
         else if(PROGRAMM.stat() == step::RESTART)
         {
-            std::cout<<"RESTART->\n"<<std::endl;
-            PROGRAMM.start();
+           PROGRAMM.s_restart();
         }
         else if(PROGRAMM.stat() == step::END)
         {
-            win.close();
+            PROGRAMM.s_end();
         }
         else // pause 
         {
-            if(win.waitEvent(win_event))
-            {
-                if(win_event.type == sf::Event::KeyReleased)
-                {
-                  switch(win_event.key.code)
-                  {
-                    case sf::Keyboard::Q :
-                    {
-                        PROGRAMM.end();
-                        std::cout<<"exit after pause\n";
-                        break;
-                    }
-                    case sf::Keyboard::R : 
-                    {
-                        PROGRAMM.restart();
-                        std::cout<<"restart after pause\n";
-                        break;
-                    }
-                    case sf::Keyboard::P :
-                    {
-                        PROGRAMM.start(); 
-                        std::cout<<"start after pause\n";
-                        break;
-                    }
-                  }  
-                }
-            }
-          
+            PROGRAMM.s_pause();
         }
 
         
-        while (win.pollEvent(win_event))
+        while (win.pollEvent(win_event)) // Traitement des évennements de la fenêtre 
         {
             if(win_event.type == sf::Event::Closed) {
                win.close();
@@ -112,26 +83,31 @@ int main()
                 {
                     case sf::Keyboard::Q :
                     {
-                        PROGRAMM.end();
+                        PROGRAMM.set_stat(step::END);
                         break;
                     }
                     case sf::Keyboard::P : 
                     {
-                        PROGRAMM.pause();
+                        PROGRAMM.set_stat(step::PAUSE);
                         break;
                     }
                     case sf::Keyboard::R : 
                     {
-                        PROGRAMM.restart();
+                        PROGRAMM.set_stat(step::RESTART);
                         break;
                     }
 
                 }
             
             } 
+
+            if(win_event.type == sf::Event::LostFocus)
+            {
+                PROGRAMM.set_stat(step::PAUSE);
+            }
         }
         
-
+        //Affichage 
         win.clear(sf::Color::Black);
 
         win.draw(rect_test);
