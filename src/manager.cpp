@@ -44,3 +44,9 @@ const sf::Sprite& manager::get_sprite() const
     return m_target_sprite;
 }
 
+std::shared_ptr<sf::Sprite> manager::get_sprite_ptr()
+{
+    return std::make_shared<sf::Sprite>(&m_target_sprite);
+}
+
+

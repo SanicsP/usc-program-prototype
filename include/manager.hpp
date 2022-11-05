@@ -24,6 +24,8 @@ public :
 
     const sf::Sprite& get_sprite() const ;
 
+    std::shared_ptr<sf::Sprite> get_sprite_ptr();
+
 
 
 
