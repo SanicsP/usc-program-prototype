@@ -32,6 +32,7 @@ set(sources
     ${sources_dir}/manager.cpp
     ${sources_dir}/recorder.cpp
     ${sources_dir}/session.cpp
+    ${sources_dir}/effect.cpp
 
 )
 
