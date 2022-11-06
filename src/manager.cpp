@@ -5,7 +5,7 @@ manager::manager(std::shared_ptr<sf::RectangleShape> rect_ptr , click_box* click
 m_rect_ptr(rect_ptr) , 
 m_click_box_ptr(click_box_ptr) ,
 m_screen_ptr(screen_ptr),
-m_win(win) , m_sfx_ptr(nullptr) , m_effect_working(false)
+m_win(win) , m_sfx_ptr(nullptr) , m_effect_working(false) , m_effect_id(0)
 {
     m_engine.seed(1);
 }
@@ -40,15 +40,22 @@ std::shared_ptr<sf::Sprite> manager::get_sprite_ptr()
     return std::shared_ptr<sf::Sprite>(&m_target_sprite);
 }
 
-void manager::update(const sf::Event& event)
+void manager::update()
 {
-    if(m_click_box_ptr->pressed(m_win , event.mouseButton))
+    
+    if(m_click_box_ptr->pressed(m_win))
     {
         this->remove_rect();
         m_target_sprite.setPosition(m_rect_ptr->getPosition());
-        
-        if(!m_effect_working) {
-            m_sfx_ptr = std::unique_ptr<basic_effect>(new size_oscilation_effect{10 , 450 , 40 , sf::seconds(10) 
+        m_effect_id = 1;
+    }
+
+    if(m_effect_id == 1 )
+    {
+
+        if(!m_effect_working) 
+        {
+            m_sfx_ptr = std::unique_ptr<basic_effect>(new size_oscilation_effect{2 , 70 , 40, sf::seconds(0.25) 
             ,  std::shared_ptr<sf::RectangleShape>(m_rect_ptr) , std::shared_ptr<sf::Sprite>(&m_target_sprite)});
             m_sfx_ptr->effect_on(true);
             m_effect_working = true;
@@ -57,14 +64,15 @@ void manager::update(const sf::Event& event)
         {
             if(m_sfx_ptr->is_finished())
             {
-                
-                std::cout<<"effet fini il va etre detruit\n";
-                m_effect_working = false;
-                m_sfx_ptr.release();
+                    
+                    std::cout<<"effet fini il va etre detruit\n";
+                    m_effect_working = false;
+                    m_effect_id = 0;
+                    m_sfx_ptr.release();
             }
             else
             {
-                m_sfx_ptr->update();
+                    m_sfx_ptr->update();
             }
         }
 

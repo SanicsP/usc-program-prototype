@@ -12,7 +12,7 @@ int main()
 
     sf::RectangleShape rect_test{sf::Vector2f(70 , 40)};
     rect_test.setFillColor({255 , 127 , 0});
-    sf::VideoMode win_size{500 , 500};
+    sf::VideoMode win_size{800 , 800};
     
     sf::Font font;
     sf::Texture target_texture;
@@ -50,6 +50,7 @@ int main()
         if(PROGRAMM.stat() == step::START)
         {
            PROGRAMM.s_start();
+           manage_test.update();
 
         }
         else if(PROGRAMM.stat() == step::RESTART)
@@ -74,8 +75,7 @@ int main()
 
             else if(win_event.type == sf::Event::MouseButtonReleased)
             {
-                if(PROGRAMM.stat() == step::START)
-                    manage_test.update(win_event);
+            
             }
 
             if(win_event.type == sf::Event::KeyReleased)

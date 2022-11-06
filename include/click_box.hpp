@@ -10,7 +10,7 @@ class click_box
 public: 
 
     click_box(std::shared_ptr<sf::RectangleShape> Prect , const sf::Mouse::Button& scoped  );
-    bool pressed(sf::RenderWindow& win , const sf::Event::MouseButtonEvent& event_bouton) const; 
+    bool pressed(sf::RenderWindow& win ) const; 
 
     friend class manager;
 

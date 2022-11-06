@@ -22,7 +22,7 @@ public :
     
     void remove_rect();
 
-    void update(const sf::Event& event);
+    void update();
 
     void set_target_sprite_texture(const sf::Texture& texture);
 
@@ -51,6 +51,8 @@ private :
     std::unique_ptr<basic_effect> m_sfx_ptr;
 
     bool m_effect_working;
+
+    uint16_t m_effect_id;
 
 
 

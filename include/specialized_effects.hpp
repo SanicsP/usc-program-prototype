@@ -18,6 +18,7 @@ private :
     double m_omega;
     double m_min;
     double m_max;
+    bool m_first_call;
 
 
 };
